@@ -1,0 +1,13 @@
+exportPattern("^[[:alpha:]]+")
+import("lattice","rugarch", "tcltk","sandwich")
+importFrom("grDevices", "dev.new","colorRampPalette")
+importFrom("graphics", "abline", "boxplot", "grid", "legend", "lines",
+             "par", "plot.new")
+importFrom("stats", "as.formula", "Box.test", "arima", "density","is.ts","lm", "na.omit",
+             "plot.ts", "pnorm", "ppoints", "predict", "qnorm","rnorm", "sd","terms",
+             "time", "ts.plot", "tsdiag", "var")
+importFrom("utils", "head","write.csv")
+importFrom("boot", "boot")
+export("iClick.ARIMA","iClick.GARCH","iClick.VisOneReturns","iClick.VisAssetPrice","iClick.lm","VIF_no")
+export("boxPlotX","cumulatedPlotX","drawdownPlotX","drawupPlotX","drawups","qqnormPlotX","seriesPlotX")
+export("calendarHeat","cutAndStack")
