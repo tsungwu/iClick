@@ -1,8 +1,8 @@
 Package: iClick
 Type: Package
 Title: A Button-Based GUI for Financial and Economic Data Analysis
-Version: 1.3
-Date: 2017-11-23
+Version: 1.4
+Date: 2017-12-05
 Author: Ho Tsung-wu
 Maintainer: Ho Tsung-wu <tsungwu@mail.shu.edu.tw>
 Description: A GUI designed to support the analysis of financial-economic time
@@ -11,7 +11,7 @@ License: GPL (>= 2)
 LazyData: TRUE
 LazyLoad: yes
 Depends:
-    lattice,rugarch,tcltk,sandwich
+    R (>= 2.10),lattice,rugarch,tcltk,sandwich,xts
 Imports:
     boot,
     car,
@@ -24,5 +24,7 @@ Imports:
     openair,
     papeR,
     timeDate,
-    timeSeries
+    timeSeries,
+    zoo
+    
 

@@ -1,5 +1,5 @@
 exportPattern("^[[:alpha:]]+")
-import("lattice","rugarch", "tcltk","sandwich")
+import("lattice","rugarch", "tcltk","sandwich","zoo","xts")
 importFrom("grDevices", "dev.new","colorRampPalette")
 importFrom("graphics", "abline", "boxplot", "grid", "legend", "lines",
              "par", "plot.new")
