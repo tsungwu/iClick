@@ -1,14 +1,7 @@
 iClick.VisOneReturns <- function(dat) {
 
-if (class(dat)=="ts"){
-  x=timeSeries::as.timeSeries(dat)
-}
-else if (ncol(dat)==2) {
-y=cbind(dat[,2])
-rownames(y)=as.character(dat[,1])
-x=timeSeries::as.timeSeries(y)
-colnames(x)=c(names(dat)[2])
-}
+  x=timeSeries::as.timeSeries(zoo::as.zoo(dat))
+  if (ncol(x)>=2){print("Only univariate time series data is allowed");stop}
 
     N = ceiling(sqrt(ncol(x)))
 

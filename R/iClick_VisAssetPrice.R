@@ -1,20 +1,16 @@
 
-iClick.VisAssetPrice <- function(DAT,color4="r2b",color5="jet") {
+iClick.VisAssetPrice <- function(dat,color4="r2b",color5="jet") {
 Sys.setlocale(category = "LC_ALL", locale = "English_United States.1252")
 
-x=cbind(DAT[,2])
-rownames(x)=as.character(DAT[,1])
-y=timeSeries::as.timeSeries(x)
+  y=timeSeries::as.timeSeries(zoo::as.zoo(dat))
+  if (ncol(y)>=2){print("Only univariate time series data is allowed");stop}
 
-
-colnames(y)=c(names(DAT)[2])
-head(y)
 YMD=time(y)
 yr=unique(lubridate::year(YMD))
 charvec <- timeDate::timeCalendar(m = 12, d = 15:31, y = yr[1]-1, FinCenter = "GMT")
 fake=timeSeries::as.timeSeries(rnorm(length(charvec)),charvec)
 colnames(fake)=colnames(y)
-x=rbind(fake,y);head(x,30)
+x=rbind(fake,y)
 names(x)=names(y)
 
 
@@ -30,7 +26,7 @@ real.Data=timeSeries::as.timeSeries(data.frame(data.Date,unclass(x)))
 newData=cbind(full.Data,real.Data)[,-1]
 
 dat=data.frame(date,unclass(newData))
-colnames(dat)=c("date",names(DAT)[2])
+#colnames(dat)=c("date",colnames(dat))
     dataRefreshCode <- function(...)  {
     type = as.integer(.oneClickCalendarPlot(obj.name = "plotType"))
     #Unit = colnames(x)
@@ -54,40 +50,40 @@ colnames(dat)=c("date",names(DAT)[2])
 
         #=== Calender heatmap:
         if (type == 4) {
-        print(calendarHeat(y,color=color4))
+          dev.new();print(calendarHeat(y,color=color4))
         }
 
-        if (type == 5) {openair::calendarPlot(dat,pollutant=names(dat)[2],main=paste(names(dat),"in", yr[2]),cols =color5,year=yr[2])
+        if (type == 5) {dev.new();openair::calendarPlot(dat,pollutant=names(dat)[2],main=paste(names(dat),"in", yr[2]),cols =color5,year=yr[2])
         }
 
-        if (type == 6) {openair::calendarPlot(dat,pollutant=names(dat)[2],main=paste(names(dat),"in", yr[3]),cols=color5,year=yr[3])
+        if (type == 6) {dev.new();openair::calendarPlot(dat,pollutant=names(dat)[2],main=paste(names(dat),"in", yr[3]),cols=color5,year=yr[3])
         }
 
-        if (type == 7) {openair::calendarPlot(dat,pollutant=names(dat)[2],main=paste(names(dat),"in", yr[4]),cols = color5,year=yr[4])
+        if (type == 7) {dev.new();openair::calendarPlot(dat,pollutant=names(dat)[2],main=paste(names(dat),"in", yr[4]),cols = color5,year=yr[4])
         }
 
-        if (type == 8) {openair::calendarPlot(dat,pollutant=names(dat)[2],main=paste(names(dat),"in", yr[5]),cols = color5,year=yr[4])
+        if (type == 8) {dev.new();openair::calendarPlot(dat,pollutant=names(dat)[2],main=paste(names(dat),"in", yr[5]),cols = color5,year=yr[4])
         }
 
-        if (type == 9) {openair::calendarPlot(dat,pollutant=names(dat)[2],main=paste(names(dat),"in", yr[6]),cols = color5,year=yr[6])
+        if (type == 9) {dev.new();openair::calendarPlot(dat,pollutant=names(dat)[2],main=paste(names(dat),"in", yr[6]),cols = color5,year=yr[6])
         }
 
-        if (type == 10) {openair::calendarPlot(dat,pollutant=names(dat)[2],main=paste(names(dat),"in", yr[7]),cols = color5,year=yr[7])
+        if (type == 10) {dev.new();openair::calendarPlot(dat,pollutant=names(dat)[2],main=paste(names(dat),"in", yr[7]),cols = color5,year=yr[7])
         }
 
-        if (type == 11) {openair::calendarPlot(dat,pollutant=names(dat)[2],main=paste(names(dat),"in", yr[8]),cols = color5,year=yr[8])
+        if (type == 11) {dev.new();openair::calendarPlot(dat,pollutant=names(dat)[2],main=paste(names(dat),"in", yr[8]),cols = color5,year=yr[8])
         }
 
-        if (type == 12) {openair::calendarPlot(dat,pollutant=names(dat)[2],main=paste(names(dat),"in", yr[9]),cols = color5,year=yr[9])
+        if (type == 12) {dev.new();openair::calendarPlot(dat,pollutant=names(dat)[2],main=paste(names(dat),"in", yr[9]),cols = color5,year=yr[9])
         }
 
-        if (type == 13) {openair::calendarPlot(dat,pollutant=names(dat)[2],main=paste(names(dat),"in", yr[10]),cols = color5,year=yr[10])
+        if (type == 13) {dev.new();openair::calendarPlot(dat,pollutant=names(dat)[2],main=paste(names(dat),"in", yr[10]),cols = color5,year=yr[10])
         }
 
-        if (type == 14) {openair::calendarPlot(dat,pollutant=names(dat)[2],main=paste(names(dat),"in", yr[11]),cols = color5,year=yr[11])
+        if (type == 14) {dev.new();openair::calendarPlot(dat,pollutant=names(dat)[2],main=paste(names(dat),"in", yr[11]),cols = color5,year=yr[11])
         }
 
-        if (type == 15) {openair::calendarPlot(dat,pollutant=names(dat)[2],main=paste(names(dat),"in", yr[12]),cols = color5,year=yr[12])
+        if (type == 15) {dev.new();openair::calendarPlot(dat,pollutant=names(dat)[2],main=paste(names(dat),"in", yr[12]),cols = color5,year=yr[12])
         }
 
 }  #End of dataRefreshCode()

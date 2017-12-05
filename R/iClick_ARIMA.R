@@ -1,12 +1,8 @@
 
 iClick.ARIMA <- function(dat,AR=1, MA=1,n.ahead=24,ic="aic") {
+  x=timeSeries::as.timeSeries(zoo::as.zoo(dat))
+  if (ncol(x)>=2){print("Only univariate time series data is allowed");stop}
 
-  if (class(dat)=="ts"){x=timeSeries::as.timeSeries(dat)}
-  else if (ncol(dat)==2) {
-    tmp=cbind(dat[,2])
-    rownames(tmp)=as.character(dat[,1])
-    x=timeSeries::as.timeSeries(tmp)
-    colnames(x)=names(dat)[2]}
 
 t=nrow(x)
 

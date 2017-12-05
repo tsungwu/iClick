@@ -2,12 +2,8 @@ iClick.GARCH  <- function(dat,meanEQ=meanEQ,garchEQ=garchEQ,n.ahead=15) {
 
 Sys.setlocale(category = "LC_ALL", locale = "English_United States.1252")
 
-  if (class(dat)=="ts"){y=timeSeries::as.timeSeries(dat)}
-  else if (ncol(dat)==2) {
-    x=cbind(dat[,2])
-    rownames(x)=as.character(dat[,1])
-    y=timeSeries::as.timeSeries(x)
-    colnames(y)=c(names(dat)[2])}
+  y=xts::as.xts(dat)
+  if (ncol(y)>=2){print("Only univariate time series data is allowed");stop}
 
 titleNAME=paste("iClick ", garchEQ$Type,": Univariate time Series")
 
