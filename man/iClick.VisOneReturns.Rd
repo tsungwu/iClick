@@ -17,7 +17,7 @@ iClick.VisOneReturns(dat)
 
 \arguments{
   \item{dat}{
-dat has two forms:(1) It may be a 2-column data frame, with the 1-st column is the date string, and the 2nd column is the numeric return series. (2) It can also be created as a ts() object as a none daily time series. However, the ts object may not be suitable for some financial time series returns plot, for example, drawdown.
+Time series object,xts.
 }
 }
 \details{
@@ -33,13 +33,12 @@ Ho Tsung-wu <tsungwu@mail.shu.edu.tw>
 
 
 \examples{
-##== External data
-#data("returnsDaily24")
-#y=returnsDaily24[,c(1,10)]  #Select the fifth variable
+data("world20")
+y=na.omit(diff(log(world20[,1])))
 
-##== Simulation data
-dat=rnorm(100,5,1)
-y=ts(dat, start = c(1970, 1), frequency = 12)
+## Simulation data
+#dat=rnorm(200,5,1)
+#y=ts(dat, start = c(1970, 1), frequency = 12)
 iClick.VisOneReturns(y)
 
 }

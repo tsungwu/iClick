@@ -16,7 +16,7 @@ iClick.ARIMA(dat, AR = 1, MA = 1, n.ahead = 24, ic = "aic")
 
 \arguments{
   \item{dat}{
-dat has two forms:(1) It may be a 2-column data frame, with the 1-st column is the date string, and the 2nd column is the numeric return series. (2) It can also be created as a ts() object as a none daily time series. However, the ts object may not be suitable for some financial time series returns plot, for example, drawdown.
+Time series object, xts.
 }
   \item{AR}{
 Pre-specified fixed AR order.
@@ -51,8 +51,8 @@ arima() and auto.arima() of package forecast.
 \examples{
 
 ##External data
-data("returnsDaily24")
-y=returnsDaily24[,c(1,5)]
+data("world20")
+y=na.omit(diff(log(world20[,1])))
 
 ## Simulation data
 #dat=rnorm(200,5,1)

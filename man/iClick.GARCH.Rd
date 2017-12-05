@@ -19,7 +19,7 @@ iClick.GARCH(dat, meanEQ = meanEQ, garchEQ = garchEQ, n.ahead = 15)
 
 \arguments{
   \item{dat}{
-dat has two forms:(1) It may be a 2-column data frame, with the 1-st column is the date string, and the 2nd column is the numeric return series. (2) It can also be created as a ts() object as a none daily time series. However, the ts object may not be suitable for some financial time series returns plot, for example, drawdown.
+Time series object, xts.
 }
   \item{meanEQ}{
 Specification of mean equation.
@@ -51,12 +51,12 @@ library(rugarch)
 \examples{
 
 ##==External data
-#data("returnsDaily24")
-#y=returnsDaily24[,c(1,5)]
+data("world20")
+y=na.omit(diff(log(world20[,1])))
 
 ##== Simulation data
-dat=rnorm(200,5,1)
-y=ts(dat, start = c(1970, 1), frequency = 12)
+#dat=rnorm(200,5,1)
+#y=ts(dat, start = c(1970, 1), frequency = 12)
 
 meanEQ=list(AR=1,MA=0,Exo=NULL, autoFitArma=FALSE,arfimaDiff=FALSE,archM=FALSE)
   # If there are external regressors X, put them as Exo=X
