@@ -1,9 +1,9 @@
 
 iClick.VisAssetPrice <- function(dat,color4="r2b",color5="jet") {
-Sys.setlocale(category = "LC_ALL", locale = "English_United States.1252")
 
   y=timeSeries::as.timeSeries(zoo::as.zoo(dat))
   if (ncol(y)>=2){print("Only univariate time series data is allowed");stop}
+Sys.setlocale(category = "LC_ALL", locale = "English_United States.1252")
 
 YMD=time(y)
 yr=unique(lubridate::year(YMD))
@@ -40,12 +40,12 @@ dat=data.frame(date,unclass(newData))
 
         #=== Price Series Plot:
         if (type == 2) {
-        seriesPlotX(y,ylab="Price", col = "indianred2")
+        dev.new();seriesPlotX(y,ylab="Price", col = "indianred2")
         }
 
         #=== Cut and Connect
         if (type == 3) {
-        print(cutAndStack(y, number=6, overlap = 0.1))
+        dev.new();print(cutAndStack(y, number=6, overlap = 0.1))
         }
 
         #=== Calender heatmap:
