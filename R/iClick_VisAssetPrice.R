@@ -1,6 +1,8 @@
 
 iClick.VisAssetPrice <- function(dat,color4="r2b",color5="jet") {
 
+  NNA=forecast::auto.arima(rnorm(100))
+
   y=timeSeries::as.timeSeries(zoo::as.zoo(dat))
   if (ncol(y)>=2){print("Only univariate time series data is allowed");stop}
 Sys.setlocale(category = "LC_ALL", locale = "English_United States.1252")
