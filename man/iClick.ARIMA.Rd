@@ -41,7 +41,7 @@ Fitted ARMA regression output.
 }
 
 \author{
-Ho Tsung-wu <tsungwu@mail.shu.edu.tw>
+Ho Tsung-wu <tsungwu@ntnu.edu.tw>, College of Management, National Taiwan Normal University
 }
 
 \seealso{
@@ -50,18 +50,12 @@ arima() and auto.arima() of package forecast.
 
 \examples{
 
-##External data
-data("world20")
-y=na.omit(diff(log(world20[,1])))
-
 ## Simulation data
-#dat=rnorm(200,5,1)
-#y=ts(dat, start = c(1970, 1), frequency = 12)
+dat=rnorm(200)
+y=ts(dat, end = c(2025, 8), frequency = 12)
 
 iClick.ARIMA(y)
 
-#More
-iClick.ARIMA(y,AR = 2, MA = 2, n.ahead = 12, ic = "bic")
 
 }
 

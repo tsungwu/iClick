@@ -25,13 +25,13 @@ Color choice for 6-year calendar heatmap, the default is "jet".
 }
 }
 \details{
-This GUI is designed for financial time series, maily daily stock price. Other time series data works also, as long as it has a date column. We call function calendarPlot() from package "openair", and modified the function calendarHeat() to fit daily price.
+This GUI is designed for financial time series, maily daily stock price. Other time series data works also, as long as it has a date column. We call function calendarPlot() from package "openair", and modified the function calendarHeat() to fit daily price, which is limited to 11 years.
 }
 \value{
 Output GUI
 }
 \author{
-Ho Tsungwu <tsungwu@mail.shu.edu.tw>
+Ho Tsung-wu <tsungwu@ntnu.edu.tw>, College of Management, National Taiwan Normal University
 }
 
 

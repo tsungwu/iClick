@@ -11,7 +11,7 @@ Cut and Stack Plotting Function
 This function calls cut() to cut tiimeseries into several equal periods and plots over time.
 }
 \usage{
-cutAndStack(x, number, overlap = 0.1, type = "l", xlab = "Time", 
+cutAndStack(x, number, overlap = 0.1, type = c("l","g"), xlab = "Time",
 ylab = deparse(substitute(x)))
 }
 \arguments{
@@ -43,6 +43,6 @@ Plot
 }
 
 \author{
-Ho Tsungwu <tsungwu@mail.shu.edu.tw>
+Ho Tsung-wu <tsungwu@ntnu.edu.tw>, College of Management, National Taiwan Normal University
 }
 

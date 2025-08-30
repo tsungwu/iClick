@@ -9,7 +9,7 @@ This function generates plot by iClick.VisOneReturns().
 }
 \usage{
 cumulatedPlotX(x, index = 100, labels = TRUE, type = "l",
-col = "indianred2", ylab = "Values", title = TRUE, 
+col = "indianred2", ylab = "Values", title = TRUE,
 grid = TRUE, box = TRUE, rug = TRUE)
 }
 
@@ -18,7 +18,7 @@ grid = TRUE, box = TRUE, rug = TRUE)
 A timeSeries object, single time series returns.
 }
   \item{index}{
-Returns index. 
+Returns index.
 }
   \item{labels}{
 Whether to generate label for the graph.
@@ -54,7 +54,7 @@ Plot
 }
 
 \author{
-Ho Tsung-wu <tsungwu@mail.shu.edu.tw>
+Ho Tsung-wu <tsungwu@ntnu.edu.tw>, College of Management, National Taiwan Normal University
 }
 
 

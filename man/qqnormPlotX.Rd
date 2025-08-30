@@ -10,7 +10,7 @@ This function is within the iClick GUI, is executed within iClick.VisOneReturns(
 }
 \usage{
 qqnormPlotX(X, labels = TRUE, col = "indianred2", pch = 19,
-title = TRUE, mtext = TRUE, grid = FALSE, rug = TRUE, 
+title = TRUE, mtext = TRUE, grid = FALSE, rug = TRUE,
 scale = TRUE)
 }
 
@@ -52,7 +52,7 @@ Plot
 }
 
 \author{
-Ho Tsung-wu <tsungwu@mail.shu.edu.tw>
+Ho Tsung-wu <tsungwu@ntnu.edu.tw>, College of Management, National Taiwan Normal University
 }
 
 \seealso{

@@ -30,6 +30,6 @@ Test statistic
 }
 
 \author{
-Ho Tsung-wu <tsungwu@mail.shu.edu.tw>
+Ho Tsung-wu <tsungwu@ntnu.edu.tw>, College of Management, National Taiwan Normal University
 }
 

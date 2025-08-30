@@ -9,7 +9,7 @@ Box-Whisker plot.
 \encoding{latin1}
 
 \description{
-This function generates plot by iClick.VisOneReturns. 
+This function generates plot by iClick.VisOneReturns.
 }
 \usage{
 boxPlotX(X, col = "indianred2", title = TRUE)
@@ -36,7 +36,7 @@ Plot a graph
 }
 
 \author{
-Ho Tsung-wu <tsungwu@mail.shu.edu.tw>
+Ho Tsung-wu <tsungwu@ntnu.edu.tw>, College of Management, National Taiwan Normal University
 }
 
 \seealso{
