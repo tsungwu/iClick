@@ -22,7 +22,7 @@ myformula<-as.formula(paste(NAMES[1],paste(NAMES[-1],collapse="+"),sep="~"))
 }
 
 OUT<-lm(formula=myformula,data=dat)
-COEF.HC <- round(unclass(lmtest::coeftest(OUT, vcov = vcovHC(OUT, type = "HC0"))),4)
+COEF.HC <- round(unclass(lmtest::coeftest(OUT, vcov = sandwich::vcovHC(OUT, type = "HC0"))),4)
 results=summary(OUT)
 COEF.pretty<-papeR::prettify(as.data.frame(round(coef(summary(OUT)),4)))
 COEF.HC.pretty= papeR::prettify(as.data.frame(COEF.HC))

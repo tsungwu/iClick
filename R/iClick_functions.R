@@ -67,17 +67,6 @@ cumulatedPlotX <- function(x, index = 100, labels = TRUE, type = "l", col = "ind
     invisible()
 }
 
-drawdownPlotX <-
-function(x, labels = TRUE, type = "l", col = "darkgreen",
-    title = TRUE, ylab="Down returns",grid = TRUE, box = TRUE, rug = TRUE)
-{
-    x = timeSeries::drawdowns(x)
-    seriesPlotX(x, labels = labels,ylab=ylab, type = type, col = col,
-        title = title, grid = grid, box = box, rug = rug)
-
-    # Return Value:
-    invisible()
-}
 
 drawdownPlotX <-
   function(x, labels = TRUE, type = "l", col = "darkgreen",

@@ -1,17 +1,20 @@
-calendarHeat <- function(values, ncolors=99,color="r2b",date.form = "%Y-%m-%d") {
-  varname=names(values)
-  dates=time(values)
+calendar.heat <- function(data,
+                         ncolors=99,color="r2b",
+                         date.form = "%Y-%m-%d",
+                         main=NULL) {
+  dates=time(data)
+
   Yr=unique(lubridate::year(dates))
   if (length(Yr)>=6) {
     start=grep(as.character(max(Yr)-5),dates)[1]
-    values<-values[start:length(values),]}
-  else {values<-values}
+    data<-data[start:length(data),]}
+  else {data<-data}
 
-  dates=time(values)
-  if (class(dates) == "character" | class(dates) == "factor" ) {
+  dates=time(data)
+  if (inherits(dates) == "character" | inherits(dates) == "factor" ) {
     dates <- strptime(dates, date.form)
   }
-  caldat <- data.frame(value = values, dates = dates)
+  caldat <- data.frame(value = data, dates = dates)
 
   min.date <- as.Date(paste(format(min(dates), "%Y"),
                             "-1-1",sep = ""))
@@ -21,7 +24,7 @@ calendarHeat <- function(values, ncolors=99,color="r2b",date.form = "%Y-%m-%d") 
 
   caldat <- data.frame(date.seq = seq(min.date, max.date, by="days"), value = NA)
   dates <- as.Date(dates)
-  caldat$value[match(dates, caldat$date.seq)] <- values
+  caldat$value[match(dates, caldat$date.seq)] <- data
 
   caldat$dotw <- as.numeric(format(caldat$date.seq, "%w"))
   caldat$woty <- as.numeric(format(caldat$date.seq, "%U")) + 1
@@ -62,7 +65,7 @@ calendarHeat <- function(values, ncolors=99,color="r2b",date.form = "%Y-%m-%d") 
                               layout = c(1, nyr%%7),
                               between = list(x=0, y=c(1,1)),
                               strip=TRUE,
-                              main = paste("Calendar Heat Map of ", varname, sep = ""),
+                              main = ifelse(is.null(main),paste0("Calendar Heatmap of ", names(data)), main),
                               scales = list(
                                 x = list(
                                   at= c(seq(2.9, 52, by=4.42)),
@@ -210,15 +213,23 @@ calendarHeat <- function(values, ncolors=99,color="r2b",date.form = "%Y-%m-%d") 
 
 
 
-cutAndStack <- function(x, number, overlap = 0.1, type = 'l',xlab = "Time", ylab = deparse(substitute(x))) {
+cutAndStack <- function(x, number,
+                        overlap = 0.1,
+                        type = c('l','g'),
+                        xlab = "Time",
+                        ylab = deparse(substitute(x))) {
   date.year=substring(rownames(x),1,4)
   date.month=substring(rownames(x),6,7)
   date.day=substring(rownames(x),9,10)
   myTime=as.matrix(paste(date.year,paste(date.month,date.day,sep=""),sep="."))
   time <- if (is.ts(x)) time(x) else seq_along(x)
   Time <- equal.count(as.numeric(time),number = number, overlap = overlap)
-  xyplot(as.numeric(x) ~ time | Time,
-         type = type, xlab = xlab, ylab = ylab,
+
+  lattice::xyplot(as.numeric(x) ~ time | Time,
+         type = type,
+         xlab = xlab,
+         ylab = ylab,
          default.scales = list(x = list(relation = "free"),
-                               y = list(relation = "free")))
+                               y = list(relation = "free")),
+         lwd=2)
 }

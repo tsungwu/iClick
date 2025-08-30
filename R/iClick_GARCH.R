@@ -27,8 +27,8 @@ varSpec=list(model=garchEQ$Type,garchOrder = c(garchEQ$P,garchEQ$Q),submodel = N
 distSpec=c("norm","snorm","std","sstd","ged","sged","nig","jsu")
 By=distSpec
 
-myspecBench=ugarchspec(mean.model=meanSpec, variance.model=varSpec, distribution.model="jsu")
-bench=ugarchfit(spec=myspecBench, data =y, solver.control = list(trace = 0))
+myspecBench=rugarch::ugarchspec(mean.model=meanSpec, variance.model=varSpec, distribution.model="jsu")
+bench=rugarch::ugarchfit(spec=myspecBench, data =y, solver.control = list(trace = 0))
 filenameALL=paste(".",garchEQ$Type,sep="")
 #==========
 #==========Beginning loop
@@ -53,14 +53,14 @@ newsImpactData=list()
 OUTPUT=list()
 
 for (j in 1:length(distSpec)) {
-mainSpec=ugarchspec(mean.model=meanSpec, variance.model=varSpec, distribution.model=distSpec[j])
+mainSpec=rugarch::ugarchspec(mean.model=meanSpec, variance.model=varSpec, distribution.model=distSpec[j])
 
-fit=ugarchfit(spec=mainSpec, data =y, solver="hybrid",solver.control = list(trace = 0))
-mainSpecFilter=ugarchspec(mean.model=meanSpec, variance.model=varSpec, distribution.model=distSpec[j],fixed.pars = as.list(coef(fit)))
+fit=rugarch::ugarchfit(spec=mainSpec, data =y, solver="hybrid",solver.control = list(trace = 0))
+mainSpecFilter=rugarch::ugarchspec(mean.model=meanSpec, variance.model=varSpec, distribution.model=distSpec[j],fixed.pars = as.list(coef(fit)))
 
-fcst.tmp=ugarchforecast(fit, data = y, n.ahead = n.ahead, n.roll = 0, external.forecasts = list(mregfor = NULL, vregfor = NULL))
+fcst.tmp=rugarch::ugarchforecast(fit, data = y, n.ahead = n.ahead, n.roll = 0, external.forecasts = list(mregfor = NULL, vregfor = NULL))
 garchSD.tmp=rugarch::sigma(fit)
-newsImpactData.tmp=newsimpact(fit)
+newsImpactData.tmp=rugarch::newsimpact(fit)
 
 results[[j]]=fit
 fcst[[j]]=fcst.tmp
@@ -75,33 +75,33 @@ tratio=SLOT[,3]
 pvalue=SLOT[,4]
 COEF[[By[j]]]=SLOT
 
-if (length(rownames(nyblom(fit)$IndividualStat))<length(rownames(nyblom(bench)$IndividualStat))) {
-add=which(rownames(nyblom(bench)$IndividualStat) %in% rownames(nyblom(fit)$IndividualStat)==FALSE)
+if (length(rownames(rugarch::nyblom(fit)$IndividualStat))<length(rownames(rugarch::nyblom(bench)$IndividualStat))) {
+add=which(rownames(rugarch::nyblom(bench)$IndividualStat) %in% rownames(rugarch::nyblom(fit)$IndividualStat)==FALSE)
 MM=matrix(NA,length(add),1)
-rownames(MM)=rownames(nyblom(bench)$IndividualStat)[add]
-nyblomIndiv.temp=rbind(nyblom(fit)$IndividualStat,MM)
+rownames(MM)=rownames(rugarch::nyblom(bench)$IndividualStat)[add]
+nyblomIndiv.temp=rbind(rugarch::nyblom(fit)$IndividualStat,MM)
 }  else  {
- nyblomIndiv.temp=nyblom(fit)$IndividualStat
+ nyblomIndiv.temp=rugarch::nyblom(fit)$IndividualStat
 }
 nyblomIndiv0=cbind(nyblomIndiv0,nyblomIndiv.temp)
 
-JointStat=nyblom(fit)$JointStat;names(JointStat)="JointStat"
-nyblomJoint.tmp=c(JointStat,nyblom(fit)$JointCritical)
+JointStat=rugarch::nyblom(fit)$JointStat; names(JointStat)="JointStat"
+nyblomJoint.tmp=c(JointStat,rugarch::nyblom(fit)$JointCritical)
 nyblomJoint=rbind(nyblomJoint,nyblomJoint.tmp)
-IndividualCV=cbind(IndividualCV, nyblom(fit)$IndividualCritical)
-HalfLife=rbind(HalfLife,halflife(fit))
-LLK=round(likelihood(fit),2)
-criteria.tmp=rbind(round(infocriteria(fit),4),LLK)
+IndividualCV=cbind(IndividualCV, rugarch::nyblom(fit)$IndividualCritical)
+HalfLife=rbind(HalfLife,rugarch::halflife(fit))
+LLK=round(rugarch::likelihood(fit),2)
+criteria.tmp=rbind(round(rugarch::infocriteria(fit),4),LLK)
 criteria=cbind(criteria,criteria.tmp)
-volatility=cbind(volatility,sigma(fit))
+volatility=cbind(volatility,rugarch::sigma(fit))
 
-SB.tratio_tmp=round(signbias(fit)[,1],4)
-SB.pvalue_tmp=round(signbias(fit)[,2],4)
+SB.tratio_tmp=round(rugarch::signbias(fit)[,1],4)
+SB.pvalue_tmp=round(rugarch::signbias(fit)[,2],4)
 SB.tratio=cbind(SB.tratio,SB.tratio_tmp)
 SB.pvalue=cbind(SB.pvalue,SB.pvalue_tmp)
 
-gof.stat_tmp=round(gof(fit,c(20,30,40,50))[,2],4)
-gof.pvalue_tmp=round(gof(fit,c(20,30,40,50))[,3],8)
+gof.stat_tmp=round(rugarch::gof(fit,c(20,30,40,50))[,2],4)
+gof.pvalue_tmp=round(rugarch::gof(fit,c(20,30,40,50))[,3],8)
 gof.stat=cbind(gof.stat,gof.stat_tmp)
 gof.pvalue=cbind(gof.pvalue,gof.pvalue_tmp)
 }
@@ -116,13 +116,13 @@ colnames(criteria)=By
 colnames(volatility)=By
 rownames(HalfLife)=By
 
-SB.rownames=rownames(signbias(results[[1]]))
+SB.rownames=rownames(rugarch::signbias(results[[1]]))
 colnames(SB.tratio)=By
 rownames(SB.tratio)=SB.rownames
 colnames(SB.pvalue)=By
 rownames(SB.pvalue)=SB.rownames
 
-gof.rownames=gof(results[[1]],c(20,30,40,50))[,"group"]
+gof.rownames=rugarch::gof(results[[1]],c(20,30,40,50))[,"group"]
 colnames(gof.stat)=By
 rownames(gof.stat)=gof.rownames
 colnames(gof.pvalue)=By

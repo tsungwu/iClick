@@ -1,7 +1,7 @@
 
 iClick.ARIMA <- function(dat,AR=1, MA=1,n.ahead=24,ic="aic") {
-  x=timeSeries::as.timeSeries(zoo::as.zoo(dat))
-  if (ncol(x)>=2){print("Only univariate time series data is allowed");stop}
+  x=timeSeries::as.timeSeries(dat)
+  if (ncol(x)>=2){stop("\nError:Only univariate time series data is allowed")}
 
 
 t=nrow(x)
@@ -58,7 +58,8 @@ cat("\n", "2.","\n")
 print(fixed_LB2)
                 }
 if (type == 5) {
-plot(density(out.fixed$residuals), col="blue", xlim=c(-8,8),main=paste("Residuals of ",names(x),", ",ARIMA.fixed,sep=""))
+plot(density(out.fixed$residuals), col="blue", xlim=c(-8,8),
+     main=paste("Residuals of ",names(x),", ",ARIMA.fixed,sep=""))
 
           }
 
