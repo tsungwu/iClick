@@ -1,17 +1,21 @@
 Package: iClick
 Type: Package
 Title: A Button-Based GUI for Financial and Economic Data Analysis
-Version: 1.4
-Date: 2018-02-24
-Author: Ho Tsung-wu
-Maintainer: Ho Tsung-wu <tsungwu@mail.shu.edu.tw>
+Version: 1.6
+Date: 2025-08-21
+Authors@R: person(given = "Ho",
+                    family = "Tsung-wu",
+                    role = c("aut", "cre"),
+                    email = "tsungwu@ntnu.edu.tw")
+Author: Ho Tsung-wu [aut, cre]
+Maintainer: Ho Tsung-wu <tsungwu@ntnu.edu.tw>
 Description: A GUI designed to support the analysis of financial-economic time
     series data.
 License: GPL (>= 2)
 LazyData: TRUE
 LazyLoad: yes
 Depends:
-    R (>= 2.10),lattice,rugarch,tcltk,sandwich,xts
+    R (>= 2.10),fPortfolio,tcltk, lattice
 Imports:
     boot,
     car,
@@ -19,12 +23,19 @@ Imports:
     fBasics,
     forecast,
     grid,
+    JFE,
+    FRAPO,
     lmtest,
     lubridate,
+    methods,
     openair,
     papeR,
+    quantmod,
+    rugarch,
+    sandwich,
     timeDate,
     timeSeries,
+    xts,
     zoo
     
 
